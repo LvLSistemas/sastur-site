@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SASTUR — Site institucional
 
-## Getting Started
+Site de marketing/geração de leads da **SASTUR**, o CRM feito exclusivamente
+para agências de viagens e agentes independentes.
 
-First, run the development server:
+Construído para converter (teste grátis, demonstração, contato) e para
+conquistar tráfego orgânico no Google.
+
+## Stack
+
+- **Next.js 16** (App Router, SSR/SSG) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (design tokens em `src/app/globals.css`)
+- **Motion** (Framer Motion) para animações e scroll reveal
+- Componentes no padrão **shadcn/ui** (CVA + `cn`)
+- **lucide-react** para ícones
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # desenvolvimento (http://localhost:3000)
+npm run build    # build de produção
+npm run start    # servir o build
+npm run lint     # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/                  # rotas (App Router)
+    page.tsx            # Home
+    funcionalidades/    # Funcionalidades
+    solucoes/           # Soluções + landings de SEO
+      agencias-pequenas/
+      agentes-independentes/
+    precos/ blog/ contato/ privacidade/ termos/
+    opengraph-image.tsx # imagem OG gerada dinamicamente
+    icon.svg            # favicon (marca SASTUR)
+    sitemap.ts robots.ts
+  components/
+    brand/              # logo (SVG)
+    layout/             # header, footer
+    sections/           # blocos de página (hero, features, etc.)
+    seo/                # <JsonLd>
+    ui/                 # primitivos (button, badge, section, reveal...)
+  lib/                  # site config, seo helpers, faq, blog
+public/
+  logo/ screenshots/ testimonials/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## SEO implementado
 
-## Learn More
+- Metadata dinâmica por página (`buildMetadata`) + template de título
+- Canonical, Open Graph, Twitter Cards
+- JSON-LD: Organization, WebSite, SoftwareApplication, FAQPage, BreadcrumbList, BlogPosting
+- `sitemap.xml` e `robots.txt`
+- HTML semântico (um `<h1>` por página), `lang="pt-BR"`
+- Imagens otimizadas (next/image, AVIF/WebP, lazy loading)
 
-To learn more about Next.js, take a look at the following resources:
+## Pontos a finalizar (TODO)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Procure por `TODO` no código. Os principais:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **CTAs / URLs**: `src/lib/site.ts` (`cta`, `contact`, `social`) — trocar placeholders.
+- **Preços**: `src/components/sections/pricing.tsx` — valores ilustrativos.
+- **Depoimentos**: `src/components/sections/testimonials.tsx` — clientes reais.
+- **Screenshots**: `public/screenshots/README.md` — adicionar prints reais.
+- **Formulário de contato**: `src/components/sections/contact-form.tsx` — ligar a um endpoint/CRM.
+- **Logo oficial**: a marca está recriada em SVG (`src/components/brand/logo.tsx`,
+  `public/logo/`). Substitua pelos arquivos oficiais se preferir.
