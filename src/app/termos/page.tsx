@@ -7,7 +7,6 @@ export const metadata: Metadata = buildMetadata({
   path: "/termos",
   title: "Termos de Uso",
   description: "Termos de Uso da sastur.",
-  noindex: true,
 });
 
 export default function TermosPage() {

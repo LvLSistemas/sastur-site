@@ -6,7 +6,6 @@ export const metadata: Metadata = buildMetadata({
   path: "/privacidade",
   title: "Política de Privacidade",
   description: "Política de Privacidade da sastur.",
-  noindex: true,
 });
 
 export default function PrivacidadePage() {
